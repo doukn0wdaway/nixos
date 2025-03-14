@@ -34,12 +34,20 @@ require('lspconfig').lua_ls.setup {
         return vim.loop.cwd()
     end,
 	cmd = { "lua-language-server" },
-    settings = {
+	settings = {
         Lua = {
-            workspace = { checkThirdParty = false },
-            telemetry = { enable = false },
+            runtime = {
+                version = 'LuaJIT',  -- Настроим, что это будет LuaJIT
+                path = vim.split(package.path, ';'),
+            },
+            diagnostics = {
+                globals = { 'vim' },  -- Явно указываем, что vim должен быть доступен для диагностики
+            },
+            workspace = {
+                library = vim.api.nvim_get_runtime_file("", true),  -- Указываем библиотеку Neovim
+            },
         },
-    }
+    },
 }
 
 require('lspconfig').nil_ls.setup {  -- Here, replace 'nil_ls' with the correct name of the server
@@ -57,19 +65,23 @@ require('lspconfig').nil_ls.setup {  -- Here, replace 'nil_ls' with the correct 
     }
 }
 
-require('lspconfig').prettier.setup {  -- Here, replace 'nil_ls' with the correct name of the server
-    on_attach = on_attach,
-    capabilities = capabilities,
-    root_dir = function()
-        return vim.loop.cwd()
-    end,
-    cmd = { "prettier" },  -- Or the correct path to the nil-ls executable
-    settings = {
-        Nix = {
-            formatting = { enable = true },
-            linting = { enable = true },
-        },
-    }
-}
+-- require('lspconfig').prettier.setup {
+--     on_attach = on_attach,
+--     capabilities = capabilities,
+--     root_dir = function()
+--         return vim.loop.cwd()  -- Устанавливаем корень проекта как текущую директорию
+--     end,
+--     cmd = { "prettier", "--stdio" },  -- Используем stdio для взаимодействия с LSP
+--     settings = {
+--         prettier = {
+--             -- Указываем, что prettier должен искать свою конфигурацию в node_modules
+--             configPath = vim.fn.getcwd() .. "/node_modules/prettier",
+--         },
+--     },
+--     -- Проверяем, установлен ли prettier в node_modules
+--     condition = function()
+--         return vim.fn.executable(vim.fn.getcwd() .. "/node_modules/.bin/prettier") == 1
+--     end,
+-- }
 
 require('lspconfig').tailwindcss.setup { cmd = { "tailwind-language-server"}}

@@ -1,4 +1,4 @@
-{ config, pkgs,  ... }:
+{ config, pkgs, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -23,6 +23,21 @@
     pkgs.kitty
   ];
 
+  programs.waybar = {
+    enable = true;
+    settings = {
+      mainBar = {
+        layer = "top";
+        position = "top";
+        height = 30;
+        output = [ 
+          "eDP-1"
+          "HDMI-A-1"
+        ];
+      };
+    };
+  };
+
  programs.neovim = 
   let
     toLua = str: "lua << EOF\n${str}\nEOF\n";
@@ -39,7 +54,6 @@
       lua-language-server
       tailwindcss-language-server
       nil
-
       xclip
       wl-clipboard
     ];
@@ -120,12 +134,19 @@
     # '';
   };
 
+  programs.direnv = {
+    enable = true;
+    enableZshIntegration = true;
+    nix-direnv.enable = true;
+    # silent = true;
+  };
 
 programs.zsh = {
     enable = true;
     # Если хотите добавить алиасы для zsh
     shellAliases = {
       update = "sudo nixos-rebuild switch --flake ~/nixos#default";
+      updateImp= "sudo nixos-rebuild switch --flake ~/nixos#default --impure";
     };
     # Включаем Oh My Zsh
     oh-my-zsh = {
@@ -138,15 +159,8 @@ programs.zsh = {
     };
   };
 
-programs.kitty = {
-        enable = true;
-	shellIntegration.enableZshIntegration = true;
-        themeFile = "tokyo_night_moon";
-};
-
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
-  home.file = {
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
@@ -157,7 +171,6 @@ programs.kitty = {
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
-  };
 
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. These will be explicitly sourced when using a
@@ -173,7 +186,6 @@ programs.kitty = {
   #
   # or
   #
-  #  /etc/profiles/per-user/etraxis/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
   };
@@ -184,6 +196,7 @@ programs.kitty = {
     settings = {
         devices = {
 	        "pixel-phone" = { id = "FAXZU23-LUJRCHV-CQUXW22-KFFYIYS-7L3UD4H-DABN22A-MCXQ7Z7-MMMHDQO"; };
+            "windows-pc" = { id = "2RZBJYP-WZEO2XX-YHSMKOO-XH5EMR6-3LQRYJJ-V3RE3AF-VIG4KNU-EQQVVQ3"; };
 	};
 	gui = {
           user = "";  # Replace with your desired user

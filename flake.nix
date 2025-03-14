@@ -8,28 +8,25 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hyprswitch.url = "github:h3rmt/hyprswitch/release";
   };
 
-  outputs =
-    {
-      self,
-      nixpkgs,
-      home-manager,
-      ...
-    }:
-    let
-      system = "x86_64-linux"; # Устанавливаем архитектуру системы
-    in
-    {
-      nixosConfigurations.default = nixpkgs.lib.nixosSystem {
-        system = system;
-        specialArgs = {
-          inherit self;
-        };
-        modules = [
-          ./configuration.nix
-          home-manager.nixosModules.default # Подключаем модуль Home Manager
-        ];
-      };
+
+outputs = { self, nixpkgs, home-manager, ... }@inputs: 
+let
+  system = "x86_64-linux";  # Define the system architecture here
+in
+{
+  nixosConfigurations.default = nixpkgs.lib.nixosSystem {
+    system = system;
+    specialArgs = {
+      inherit self;
+      inherit inputs;
     };
+    modules = [
+      ./configuration.nix  # Your NixOS configuration
+      home-manager.nixosModules.default  # Home Manager module
+    ];
+  };
+};
 }
