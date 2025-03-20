@@ -20,7 +20,6 @@
   # environment.
   home.packages = [
     pkgs.syncthing
-    pkgs.kitty
   ];
 
   programs.waybar = {
@@ -160,6 +159,18 @@ programs.zsh = {
   };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
+
+   home.file = {
+    ".config/kitty/kitty.conf" = {
+      source = toString ./dotfiles/kitty/kitty.conf;
+      recursive = true;
+    };
+
+    ".config/kitty/tokyo_night_moon.conf" = {
+      source = toString ./dotfiles/kitty/tokyo_night_moon.conf;
+      recursive = true;
+    };
+  };
   # plain files is through 'home.file'.
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
