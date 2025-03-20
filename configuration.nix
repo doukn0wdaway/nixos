@@ -89,7 +89,6 @@ fonts.packages =  builtins.filter lib.attrsets.isDerivation (builtins.attrValues
     git
     waybar
     dunst
-    kitty
     rofi-wayland
     libnotify
     vivaldi
