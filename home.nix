@@ -3,6 +3,7 @@
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
+  imports = [ ./modules/kitty/kitty.nix ];
 
   home.username = "etraxis";
   home.homeDirectory = "/home/etraxis";

@@ -40,7 +40,6 @@
       # Home Manager configuration for the user
       homeConfigurations.default = home-manager.lib.homeManagerConfiguration {
         system = system;
-        modules = [ ./kitty.nix ]; 
       };
     };
 }
