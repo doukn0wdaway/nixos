@@ -57,12 +57,23 @@ require('lspconfig').nil_ls.setup {  -- Here, replace 'nil_ls' with the correct 
         return vim.loop.cwd()
     end,
     cmd = { "nil" },  -- Or the correct path to the nil-ls executable
+		filetypes = { "nix" };
     settings = {
         Nix = {
-            formatting = { enable = true },
+            formatting = { enable = true, command = {"nixftm"};},
             linting = { enable = true },
         },
     }
+}
+
+require('lspconfig').typescript.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    root_dir = function()
+        return vim.loop.cwd()
+    end,
+    cmd = { "typescript-language-server" },
+		filetypes = { "ts", "tsx" };
 }
 
 -- require('lspconfig').prettier.setup {

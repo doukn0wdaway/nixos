@@ -1,4 +1,3 @@
-
 {
   description = "NixOS config with Home Manager and Hyprswitch";
 
@@ -12,11 +11,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Hyprswitch input
+    nvf= {
+      url = "github:notashelf/nvf";
+    };
+
     hyprswitch.url = "github:h3rmt/hyprswitch/release";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nvf, ... }@inputs:
     let
       system = "x86_64-linux";  # Define your target system architecture
       pkgs = import nixpkgs {
@@ -34,13 +36,12 @@
         modules = [
           ./configuration.nix  # Your main NixOS configuration file
           home-manager.nixosModules.home-manager  # Home Manager module for user configuration
+	  nvf.nixosModules.default
         ];
       };
-
       # Home Manager configuration for the user
       homeConfigurations.default = home-manager.lib.homeManagerConfiguration {
         system = system;
       };
     };
 }
-
