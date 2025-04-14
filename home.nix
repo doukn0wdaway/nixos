@@ -5,6 +5,8 @@
   # manage.
   imports = [ 
 	./modules/kitty/kitty.nix
+	./modules/hyprland/hyprland.nix
+	./modules/waybar/waybar.nix
   ];
 
   home.username = "etraxis";
@@ -25,20 +27,6 @@
     pkgs.syncthing
   ];
 
-  programs.waybar = {
-    enable = true;
-    settings = {
-      mainBar = {
-        layer = "top";
-        position = "top";
-        height = 30;
-        output = [ 
-          "eDP-1"
-          "HDMI-A-1"
-        ];
-      };
-    };
-  };
 
 programs.zsh = {
     enable = true;

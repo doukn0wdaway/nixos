@@ -39,6 +39,7 @@ fonts.packages =  builtins.filter lib.attrsets.isDerivation (builtins.attrValues
   # OR
   hardware.bluetooth.enable = true;
 
+  programs.hyprland.enable = true;
 
   security.rtkit.enable = true;
   services.pipewire = {
@@ -88,7 +89,6 @@ fonts.packages =  builtins.filter lib.attrsets.isDerivation (builtins.attrValues
   
   security.sudo.wheelNeedsPassword = false;
 
-  programs.hyprland.enable = true;
   
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     "vivaldi"  
@@ -100,12 +100,13 @@ fonts.packages =  builtins.filter lib.attrsets.isDerivation (builtins.attrValues
   programs.thunar.enable = true;
   
   xdg.portal.enable = true;
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+
   programs.nvf = {
     enable = true;
     settings = {
         vim = {
-        	theme.enable = true;
-        	theme.name = "tokyonight";
+        	theme.enable = true; theme.name = "tokyonight";
         	theme.style = "moon";
                 lsp.enable = true;
                 autocomplete.blink-cmp.enable = true;
@@ -132,7 +133,6 @@ fonts.packages =  builtins.filter lib.attrsets.isDerivation (builtins.attrValues
     networkmanager
     wireguard-tools
     git
-    waybar
     sxhkd
     dunst
     rofi-wayland 

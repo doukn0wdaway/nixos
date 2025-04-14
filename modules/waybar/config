@@ -1,0 +1,99 @@
+ {
+        "height": 24,
+        "spacing": 10,
+        // The begining of this file is filled in by home-manager
+
+        "layer": "top",
+
+        "modules-left": ["hyprland/workspaces", "hyprland/window"],
+        "modules-center": ["clock"],
+        "modules-right": ["cpu", "memory", "pulseaudio", "network", "battery", "custom/date", "tray"],
+
+        // Modules configuration
+        "hyprland/workspaces": {
+          "format": "{name}",
+          "tooltip": false,
+          "all-outputs": true,
+        },
+        "tray": {
+            // "icon-size": 21,
+            "spacing": 10
+        },
+        "clock": {
+            "format": "{:%H:%M}",
+            "timezone": "Europe/Berlin",
+            "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        },
+        "custom/date": {
+            "format": "{}",
+            "max-length": 40,
+            "interval": 36000,
+            "exec": "date +\"%d-%m-%Y \"",
+        },
+        "cpu": {
+            "format": "{usage}% ",
+            "tooltip": false
+        },
+        "memory": {
+            "format": "{}% "
+        },
+        "backlight": {
+            // "device": "acpi_video1",
+            "format": "{percent}% {icon}",
+            "format-icons": ["", "", "", "", "", "", "", "", ""]
+        },
+        "battery": {
+            "states": {
+                // "good": 95,
+                "warning": 30,
+                "critical": 10
+            },
+            "interval": 10,
+            "format": "{capacity}% {icon}",
+            "format-charging": "{capacity}%  ",
+            "format-plugged": "{capacity}%  ",
+            "format-alt": "{time} {icon}",
+            // "format-good": "", // An empty format will hide the module
+            // "format-full": "full battery",
+            "format-icons": [" ", " ", " ", " ", " "]
+        },
+        "network": {
+            "format-wifi": "{essid} ({signalStrength}%)  ",
+            "format-ethernet": "{ipaddr}/{cidr}  ",
+            "tooltip-format": "{ifname} via {gwaddr}  ",
+            "format-linked": "{ifname} (No IP)  ",
+            "format-disconnected": "disconnected",
+            "on-click": "/nix/store/wz5ys3v7pgnrddlycgiwmgskwjr30zji-network-manager-applet-1.36.0/bin/nm-connection-editor"
+        },
+        "pulseaudio": {
+            "scroll-step": 1, // %, can be a float
+            "format": "{volume}% {icon}",
+            "format-bluetooth": "{volume}% {icon}",
+            "format-bluetooth-muted": " {icon}",
+            "format-muted": "muted",
+            // "format-source": "{volume}% ",
+            // "format-source-muted": "",
+            "format-icons": {
+                "headphone": "",
+                "hands-free": "",
+                "headset": "",
+                "phone": "",
+                "portable": "",
+                "car": "",
+                "default": ["", "", ""]
+            },
+            "on-click": "pavucontrol"
+        },
+        "custom/media": {
+            "format": "{icon} {}",
+            "return-type": "json",
+            "max-length": 40,
+            "format-icons": {
+                "spotify": "",
+                "default": "🎜"
+            },
+            "escape": true,
+    //        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
+            // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
+        }
+    }
