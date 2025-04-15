@@ -150,6 +150,7 @@ fonts.packages =  builtins.filter lib.attrsets.isDerivation (builtins.attrValues
     qbittorrent
     vlc
     bluetuith 
+    brightnessctl
   ];
   
   system.stateVersion = "24.11"; 
