@@ -1,19 +1,22 @@
-
-{ config, lib, pkgs, inputs, ... }:
-
 {
-  imports =
-    [ 
-      ./hardware-configuration.nix
-      ./modules/bspwm/bspwm.nix
-    ];
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}: {
+  imports = [
+    ./hardware-configuration.nix
+    ./modules/bspwm/bspwm.nix
+    ./modules/nix-nvf/nix-nvf.nix
+  ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "doukn0wdaway-laptop"; 
-  networking.networkmanager.enable = true;  
-  nix.settings.experimental-features = [ "nix-command" "flakes"];
+  networking.hostName = "doukn0wdaway-laptop";
+  networking.networkmanager.enable = true;
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Set your time zone.
   time.timeZone = "Europe/Kyiv";
@@ -22,13 +25,13 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-fonts.packages =  builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+  fonts.packages = builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
   fonts.fontconfig.enable = true;
 
   services.xserver = {
     enable = true;
-    xkb.layout = "us,ru";  
-    xkb.options = "grp:alt_shift_toggle";  
+    xkb.layout = "us,ru";
+    xkb.options = "grp:alt_shift_toggle";
   };
 
   # Enable CUPS to print documents.
@@ -50,18 +53,18 @@ fonts.packages =  builtins.filter lib.attrsets.isDerivation (builtins.attrValues
     alsa.support32Bit = true;
 
     wireplumber.extraConfig."10-bluez" = {
-    "monitor.bluez.properties" = {
-      "bluez5.enable-sbc-xq" = true;
-      "bluez5.enable-msbc" = true;
-      "bluez5.enable-hw-volume" = true;
-      "bluez5.roles" = [
-        "hsp_hs"
-        "hsp_ag"
-        "hfp_hf"
-        "hfp_ag"
-      ];
+      "monitor.bluez.properties" = {
+        "bluez5.enable-sbc-xq" = true;
+        "bluez5.enable-msbc" = true;
+        "bluez5.enable-hw-volume" = true;
+        "bluez5.roles" = [
+          "hsp_hs"
+          "hsp_ag"
+          "hfp_hf"
+          "hfp_ag"
+        ];
+      };
     };
-  };
   };
 
   services.openssh.enable = true;
@@ -72,60 +75,33 @@ fonts.packages =  builtins.filter lib.attrsets.isDerivation (builtins.attrValues
   programs.firefox.enable = true;
   users.defaultUserShell = pkgs.zsh;
   users.users.etraxis = {
-  	isNormalUser = true;
-  	extraGroups = [ "wheel" "networkmanager" ];
-  	shell = pkgs.zsh;
-      openssh.authorizedKeys.keyFiles = [ "/home/etraxis/.ssh/id_rsa.pub" ];
+    isNormalUser = true;
+    extraGroups = ["wheel" "networkmanager"];
+    shell = pkgs.zsh;
+    openssh.authorizedKeys.keyFiles = ["/home/etraxis/.ssh/id_rsa.pub"];
   };
-  
+
   home-manager = {
-  	extraSpecialArgs = { inherit inputs; };
-  	backupFileExtension = "backup";
-  	users = {
-  		"etraxis" = import ./home.nix;
-  	};
-  };
-  
-  
-  security.sudo.wheelNeedsPassword = false;
-
-  
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "vivaldi"  
-    "obsidian"
-    "discord"
-  ];
-  
-  
-  programs.thunar.enable = true;
-  
-  xdg.portal.enable = true;
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-
-  programs.nvf = {
-    enable = true;
-    settings = {
-        vim = {
-        	theme.enable = true; theme.name = "tokyonight";
-        	theme.style = "moon";
-                lsp.enable = true;
-                autocomplete.blink-cmp.enable = true;
-                autocomplete.nvim-cmp.enable = true;
-                languages.nix = { 
-                                enable = true;
-                                format.enable = true;
-                                lsp.enable = true;
-                                treesitter.enable = true;
-                        };
-
-        };
-
-
-        
-
+    extraSpecialArgs = {inherit inputs;};
+    backupFileExtension = "backup";
+    users = {
+      "etraxis" = import ./home.nix;
     };
   };
-  
+
+  security.sudo.wheelNeedsPassword = false;
+
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "vivaldi"
+      "obsidian"
+      "discord"
+    ];
+
+  programs.thunar.enable = true;
+
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];
 
   environment.systemPackages = with pkgs; [
     wget
@@ -135,7 +111,7 @@ fonts.packages =  builtins.filter lib.attrsets.isDerivation (builtins.attrValues
     git
     sxhkd
     dunst
-    rofi-wayland 
+    rofi-wayland
     libnotify
     vivaldi
     telegram-desktop
@@ -149,10 +125,9 @@ fonts.packages =  builtins.filter lib.attrsets.isDerivation (builtins.attrValues
     discord
     qbittorrent
     vlc
-    bluetuith 
+    bluetuith
     brightnessctl
   ];
-  
-  system.stateVersion = "24.11"; 
- }
 
+  system.stateVersion = "24.11";
+}

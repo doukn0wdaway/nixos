@@ -1,8 +1,11 @@
-{ config, pkgs, ... }:
 {
-  home.packages = with pkgs; [ kitty ];
+  config,
+  pkgs,
+  ...
+}: {
+  home.packages = with pkgs; [kitty];
 
-   home.file = {
+  home.file = {
     ".config/kitty/kitty.conf" = {
       source = toString ./kitty.conf;
       recursive = true;

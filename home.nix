@@ -1,12 +1,15 @@
-{ config, pkgs, inputs, ... }:
-
 {
+  config,
+  pkgs,
+  inputs,
+  ...
+}: {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  imports = [ 
-	./modules/kitty/kitty.nix
-	./modules/hyprland/hyprland.nix
-	./modules/waybar/waybar.nix
+  imports = [
+    ./modules/kitty/kitty.nix
+    ./modules/hyprland/hyprland.nix
+    ./modules/waybar/waybar.nix
   ];
 
   home.username = "etraxis";
@@ -27,15 +30,14 @@
     pkgs.syncthing
   ];
 
-
-programs.zsh = {
+  programs.zsh = {
     enable = true;
     # Если хотите добавить алиасы для zsh
     shellAliases = {
       vpn-up = "wg-quick up ~/nixos/secrets/vpn.conf";
       vpn-down = "wg-quick down ~/nixos/secrets/vpn.conf";
       update = "sudo nixos-rebuild switch --flake ~/nixos#default";
-      updateImp= "sudo nixos-rebuild switch --flake ~/nixos#default --impure";
+      updateImp = "sudo nixos-rebuild switch --flake ~/nixos#default --impure";
     };
     # Включаем Oh My Zsh
     oh-my-zsh = {
@@ -51,16 +53,16 @@ programs.zsh = {
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
 
   # plain files is through 'home.file'.
-    # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
-    # # symlink to the Nix store copy.
-    # ".screenrc".source = dotfiles/screenrc;
+  # # Building this configuration will create a copy of 'dotfiles/screenrc' in
+  # # the Nix store. Activating the configuration will then make '~/.screenrc' a
+  # # symlink to the Nix store copy.
+  # ".screenrc".source = dotfiles/screenrc;
 
-    # # You can also set the file content immediately.
-    # ".gradle/gradle.properties".text = ''
-    #   org.gradle.console=verbose
-    #   org.gradle.daemon.idletimeout=3600000
-    # '';
+  # # You can also set the file content immediately.
+  # ".gradle/gradle.properties".text = ''
+  #   org.gradle.console=verbose
+  #   org.gradle.daemon.idletimeout=3600000
+  # '';
 
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. These will be explicitly sourced when using a
@@ -80,23 +82,23 @@ programs.zsh = {
   home.sessionVariables = {
   };
 
- # Enable Syncthing service in Home Manager
+  # Enable Syncthing service in Home Manager
   services.syncthing = {
     enable = true;
     settings = {
-        devices = {
-	        "pixel-phone" = { id = "FAXZU23-LUJRCHV-CQUXW22-KFFYIYS-7L3UD4H-DABN22A-MCXQ7Z7-MMMHDQO"; };
-            "windows-pc" = { id = "2RZBJYP-WZEO2XX-YHSMKOO-XH5EMR6-3LQRYJJ-V3RE3AF-VIG4KNU-EQQVVQ3"; };
-	};
-	gui = {
-          user = "";  # Replace with your desired user
-          password = "";  # Set your desired password (plaintext or password hash)
+      devices = {
+        "pixel-phone" = {id = "FAXZU23-LUJRCHV-CQUXW22-KFFYIYS-7L3UD4H-DABN22A-MCXQ7Z7-MMMHDQO";};
+        "windows-pc" = {id = "2RZBJYP-WZEO2XX-YHSMKOO-XH5EMR6-3LQRYJJ-V3RE3AF-VIG4KNU-EQQVVQ3";};
+      };
+      gui = {
+        user = ""; # Replace with your desired user
+        password = ""; # Set your desired password (plaintext or password hash)
+      };
+      folders = {
+        "sync" = {
+          path = "/home/etraxis/sync";
         };
-        folders = {
-      	  "sync" = {
-	     path = "/home/etraxis/sync";
-	  };
-        };
+      };
     };
   };
 
