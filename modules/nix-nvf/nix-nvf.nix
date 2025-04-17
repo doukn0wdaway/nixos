@@ -3,6 +3,12 @@
     enable = true;
     settings = {
       vim = {
+        diagnostics.enable = true;
+        filetree.neo-tree.enable = true;
+        notes.todo-comments.enable = true;
+        binds.whichKey.enable = true;
+        statusline.lualine.enable = true;
+        telescope.enable = true;
         options.tabstop = 2;
         theme.enable = true;
         theme.name = "tokyonight";
@@ -13,16 +19,28 @@
           blink-cmp.enable = true;
           enableSharedCmpSources = true;
         };
-        languages.nix = {
-          enable = true;
-          format.enable = true;
-          lsp.enable = true;
-          treesitter.enable = true;
+        languages = {
+          enableTreesitter = true;
+          enableFormat = true;
+          enableLSP = true;
+          html.enable = true;
+          ts.enable = true;
+          nix.enable = true;
+          css.enable = true;
+          rust = {
+            enable = true;
+          };
         };
+
         keymaps = [
           {
             key = ";";
             action = ":";
+            mode = "n";
+          }
+          {
+            key = "<leader>e";
+            action = "<cmd>Neotree toggle<cr>";
             mode = "n";
           }
         ];
