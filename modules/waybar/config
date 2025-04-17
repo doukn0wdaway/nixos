@@ -21,7 +21,7 @@
         },
         "clock": {
             "format": "{:%H:%M}",
-            "timezone": "Europe/Berlin",
+            "timezone": "Europe/Kyiv",
             "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         },
         "custom/date": {
