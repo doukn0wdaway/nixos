@@ -4,6 +4,8 @@
     settings = {
       vim = {
         diagnostics.enable = true;
+        diagnostics.config.update_in_insert = true;
+        diagnostics.config.virtual_lines = true;
         filetree.neo-tree.enable = true;
         notes.todo-comments.enable = true;
         binds.whichKey.enable = true;

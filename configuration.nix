@@ -18,6 +18,10 @@
   networking.networkmanager.enable = true;
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
   # Set your time zone.
   time.timeZone = "Europe/Kyiv";
 
@@ -25,7 +29,9 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  fonts.packages = builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+  fonts.packages =
+    builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+
   fonts.fontconfig.enable = true;
 
   services.xserver = {
@@ -127,6 +133,7 @@
     vlc
     bluetuith
     brightnessctl
+    libayatana-appindicator
   ];
 
   system.stateVersion = "24.11";

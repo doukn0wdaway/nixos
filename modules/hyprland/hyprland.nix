@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: {
-  home.packages = with pkgs; [hyprland];
+  home.packages = with pkgs; [hyprland hyprshot];
   home.file = {
     ".config/hypr/hyprland.conf" = {
       source = toString ./hyprland.conf;
