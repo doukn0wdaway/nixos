@@ -24,6 +24,7 @@
   };
   # Set your time zone.
   time.timeZone = "Europe/Kyiv";
+  nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";

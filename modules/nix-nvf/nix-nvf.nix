@@ -5,7 +5,7 @@
       vim = {
         diagnostics.enable = true;
         diagnostics.config.update_in_insert = true;
-        diagnostics.config.virtual_lines = true;
+        diagnostics.config.virtual_text = true;
         filetree.neo-tree.enable = true;
         notes.todo-comments.enable = true;
         binds.whichKey.enable = true;
@@ -24,13 +24,24 @@
         languages = {
           enableTreesitter = true;
           enableFormat = true;
+
           enableLSP = true;
           html.enable = true;
           ts.enable = true;
-          nix.enable = true;
+          nix = {
+            enable = true;
+            lsp = {
+              server = "nixd";
+              options = {
+                home_manager = {
+                  expr = "(builtins.getFlake \"/home/etarxis/nixos\").homeConfigurations.default.options";
+                };
+              };
+            };
+          };
           css.enable = true;
           rust = {
-            enable = true;
+            enable = false;
           };
         };
 
