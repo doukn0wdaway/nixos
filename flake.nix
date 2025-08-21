@@ -33,7 +33,6 @@
         };
         modules = [
           ./configuration.nix
-          ./home.nix
           home-manager.nixosModules.home-manager
           nvf.nixosModules.default
           hostPath

@@ -14,7 +14,6 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot.configurationLimit = 2;
 
-  networking.hostName = "doukn0wdaway-pc";
   networking.networkmanager.enable = true;
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nix.gc = {
