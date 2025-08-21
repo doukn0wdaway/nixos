@@ -1,6 +1,8 @@
 {
   config,
+  lib,
   pkgs,
+  hostname,
   inputs,
   ...
 }: {
@@ -27,15 +29,32 @@
   home.packages = [
   ];
 
+  programs.git = {
+    enable = true;
+    userName = "doukn0wdaway";
+    userEmail = "anisimov.sasha20@gmail.com";
+    extraConfig = {
+      init.defaultBranch = "dev";
+    };
+  };
+
   programs.zsh = {
     enable = true;
     # Если хотите добавить алиасы для zsh
-    shellAliases = {
-      vpn-up = "wg-quick up ~/nixos/secrets/vpn.conf";
-      vpn-down = "wg-quick down ~/nixos/secrets/vpn.conf";
-      switch-pc = "sudo nixos-rebuild switch --flake ~/nixos#pc --impure";
-      switch-laptop = "sudo nixos-rebuild switch --flake ~/nixos#laptop --impure";
-    };
+    shellAliases =
+      {
+        vpn-up = "wg-quick up ~/nixos/secrets/vpn.conf";
+        vpn-down = "wg-quick down ~/nixos/secrets/vpn.conf";
+        switch-pc = "sudo nixos-rebuild switch --flake ~/nixos#pc --impure";
+        switch-laptop = "sudo nixos-rebuild switch --flake ~/nixos#laptop --impure";
+      }
+      // lib.optionalAttrs (hostname == "pc") {
+        switch = "sudo nixos-rebuild switch --flake ~/nixos#pc --impure";
+      }
+      // lib.optionalAttrs (hostname == "laptop") {
+        switch = "sudo nixos-rebuild switch --flake ~/nixos#laptop --impure";
+      };
+
     # Включаем Oh My Zsh
     oh-my-zsh = {
       enable = true;

@@ -1,15 +1,20 @@
 {
   config,
   lib,
+  hostname,
   pkgs,
   inputs,
   ...
 }: {
-  imports = [
-    ./modules/bspwm/bspwm.nix
-    ./modules/nix-nvf/nix-nvf.nix
-  ];
+  imports =
+    [
+      ./modules/bspwm/bspwm.nix
+      ./modules/nix-nvf/nix-nvf.nix
+    ]
+    ++ lib.optional (hostname == "pc") ./pc-hardware-configuration.nix
+    ++ lib.optional (hostname == "laptop") ./laptop-hardware-configuration.nix;
 
+  networking.hostName = hostname;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot.configurationLimit = 2;
@@ -102,10 +107,10 @@
   };
 
   home-manager = {
-    extraSpecialArgs = {inherit inputs;};
+    extraSpecialArgs = {inherit inputs hostname;};
     backupFileExtension = "backup";
     users = {
-      "etraxis" = import ./home.nix;
+      etraxis = import ./home.nix;
     };
   };
 
