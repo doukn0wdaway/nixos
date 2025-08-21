@@ -6,17 +6,27 @@
   ...
 }: {
   imports = [
-    ./hardware-configuration.nix
     ./modules/bspwm/bspwm.nix
     ./modules/nix-nvf/nix-nvf.nix
   ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.systemd-boot.configurationLimit = 2;
 
-  networking.hostName = "doukn0wdaway-laptop";
+  networking.hostName = "doukn0wdaway-pc";
   networking.networkmanager.enable = true;
   nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.gc = {
+    automatic = true;
+    dates = "daily";
+    options = "--delete-older-than 5d";
+  };
+  nix.settings = {
+    auto-optimise-store = true;
+    min-free = "30G";
+    max-free = "150G";
+  };
 
   hardware.graphics = {
     enable = true;
@@ -39,6 +49,10 @@
     enable = true;
     xkb.layout = "us,ru";
     xkb.options = "grp:alt_shift_toggle";
+
+    displayManager = {
+      gdm.enable = true;
+    };
   };
 
   # Enable CUPS to print documents.
@@ -85,7 +99,7 @@
     isNormalUser = true;
     extraGroups = ["wheel" "networkmanager"];
     shell = pkgs.zsh;
-    openssh.authorizedKeys.keyFiles = ["/home/etraxis/.ssh/id_rsa.pub"];
+    openssh.authorizedKeys.keyFiles = ["/home/etraxis/.ssh/id_ed25519.pub"];
   };
 
   home-manager = {
@@ -100,9 +114,9 @@
 
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
-      "vivaldi"
       "obsidian"
       "discord"
+      "opera"
     ];
 
   programs.thunar.enable = true;
@@ -120,7 +134,7 @@
     dunst
     rofi-wayland
     libnotify
-    vivaldi
+    opera
     telegram-desktop
     keepassxc
     ranger

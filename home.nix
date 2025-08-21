@@ -34,8 +34,8 @@
     shellAliases = {
       vpn-up = "wg-quick up ~/nixos/secrets/vpn.conf";
       vpn-down = "wg-quick down ~/nixos/secrets/vpn.conf";
-      update = "sudo nixos-rebuild switch --flake ~/nixos#default";
-      updateImp = "sudo nixos-rebuild switch --flake ~/nixos#default --impure";
+      switch-pc = "sudo nixos-rebuild switch --flake ~/nixos#pc --impure";
+      switch-laptop = "sudo nixos-rebuild switch --flake ~/nixos#laptop --impure";
     };
     # Включаем Oh My Zsh
     oh-my-zsh = {
