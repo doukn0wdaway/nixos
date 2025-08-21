@@ -12,8 +12,6 @@
     nvf = {
       url = "github:notashelf/nvf";
     };
-
-    hyprswitch.url = "github:h3rmt/hyprswitch/release";
   };
 
   outputs = {

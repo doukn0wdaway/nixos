@@ -45,13 +45,15 @@
 
   fonts.fontconfig.enable = true;
 
-  services.xserver = {
-    enable = true;
-    xkb.layout = "us,ru";
-    xkb.options = "grp:alt_shift_toggle";
-
+  services = {
+    xserver = {
+      enable = true;
+      xkb.layout = "us,ru";
+      xkb.options = "grp:alt_shift_toggle";
+    };
     displayManager = {
       gdm.enable = true;
+      gdm.wayland = true;
     };
   };
 
@@ -116,7 +118,7 @@
     builtins.elem (lib.getName pkg) [
       "obsidian"
       "discord"
-      "opera"
+      # "opera"
     ];
 
   programs.thunar.enable = true;
@@ -131,10 +133,10 @@
     wireguard-tools
     git
     sxhkd
-    dunst
     rofi-wayland
     libnotify
-    opera
+    firefox
+    # opera
     telegram-desktop
     keepassxc
     ranger

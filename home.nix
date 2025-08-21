@@ -9,7 +9,6 @@
   imports = [
     ./modules/kitty/kitty.nix
     ./modules/hyprland/hyprland.nix
-    ./modules/waybar/waybar.nix
     ./modules/tmux/tmux.nix
   ];
   home.username = "etraxis";
@@ -81,25 +80,14 @@
   };
 
   # Enable Syncthing service in Home Manager
-  services.syncthing = {
-    enable = true;
-    settings = {
-      devices = {
-        "pixel-phone" = {id = "FAXZU23-LUJRCHV-CQUXW22-KFFYIYS-7L3UD4H-DABN22A-MCXQ7Z7-MMMHDQO";};
-        "windows-pc" = {id = "2RZBJYP-WZEO2XX-YHSMKOO-XH5EMR6-3LQRYJJ-V3RE3AF-VIG4KNU-EQQVVQ3";};
-      };
-      gui = {
-        user = ""; # Replace with your desired user
-        password = ""; # Set your desired password (plaintext or password hash)
-      };
-      folders = {
-        "sync" = {
-          path = "/home/etraxis/sync";
-        };
-      };
-    };
-  };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  programs.hyprpanel = {
+    # Configure and theme almost all options from the GUI.
+    # See 'https://hyprpanel.com/configuration/settings.html'.
+    # Default: <same as gui>
+    enable = true;
+  };
 }

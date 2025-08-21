@@ -25,7 +25,6 @@
           enableTreesitter = true;
           enableFormat = true;
 
-          enableLSP = true;
           html.enable = true;
           ts.enable = true;
           nix = {
