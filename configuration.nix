@@ -116,12 +116,13 @@
 
   security.sudo.wheelNeedsPassword = false;
 
-  nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [
-      "obsidian"
-      "discord"
-      "opera"
-    ];
+  nixpkgs.config.allowUnfree = true;
+  # nixpkgs.config.allowUnfreePredicate = pkg:
+  #   builtins.elem (lib.getName pkg) [
+  #     "obsidian"
+  #     "discord"
+  #     "opera"
+  #   ];
 
   programs.thunar.enable = true;
 
@@ -138,7 +139,6 @@
     dunst
     rofi-wayland
     libnotify
-    opera
     telegram-desktop
     keepassxc
     ranger
