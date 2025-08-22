@@ -8,8 +8,8 @@
 }: {
   imports =
     [
-      ./modules/bspwm/bspwm.nix
-      ./modules/nix-nvf/nix-nvf.nix
+      ./modules/bspwm
+      ./modules/nix-nvf
     ]
     ++ lib.optional (hostname == "pc") ./pc-hardware-configuration.nix
     ++ lib.optional (hostname == "laptop") ./laptop-hardware-configuration.nix;

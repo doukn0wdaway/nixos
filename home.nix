@@ -9,10 +9,10 @@
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   imports = [
-    ./modules/kitty/kitty.nix
-    ./modules/hyprland/hyprland.nix
-    ./modules/waybar/waybar.nix
-    ./modules/tmux/tmux.nix
+    ./modules/kitty
+    ./modules/hyprland
+    ./modules/waybar
+    ./modules/tmux
   ];
   home.username = "etraxis";
   home.homeDirectory = "/home/etraxis";
