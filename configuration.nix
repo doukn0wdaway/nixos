@@ -151,9 +151,33 @@
     qbittorrent
     vlc
     bluetuith
+    kicad
+    orca-slicer
     brightnessctl
+    freecad-wayland
     libayatana-appindicator
   ];
+
+  systemd.tmpfiles.rules = [
+    "d /mnt 0777 root root -"
+    "d /mnt/smb 0777 root root -"
+  ];
+
+  fileSystems."/mnt/smb" = {
+    device = "//10.0.0.4/public"; # адрес твоего Samba-сервера/шары
+    fsType = "cifs";
+    options = [
+      "guest" # гостевой доступ, без логина/пароля
+      "vers=3.11" # версия SMB (можно 3.0, если нужно)
+      "rw"
+      "iocharset=utf8"
+      "x-systemd.automount" # ленивый автомаунт при первом обращении
+      "noauto" # не пытаться монтировать на буте до запроса
+      # Если хочется «не думать» про права:
+      # "file_mode=0777"
+      # "dir_mode=0777"
+    ];
+  };
 
   system.stateVersion = "24.11";
 }
