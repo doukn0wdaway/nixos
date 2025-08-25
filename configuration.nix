@@ -191,6 +191,7 @@
 
   environment.sessionVariables = {
     WLR_RENDERER = "vulkan"; # сначала Vulkan (на AMD обычно ок)
+    NIXOS_OZONE_WWL = "1";
     # Если вдруг будут глюки — поменять на:
     # WLR_RENDERER = "gles2";
     # На некоторых GPU помогает отключить liftoff:
