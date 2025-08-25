@@ -33,20 +33,28 @@
       # "24_05" = import nixpkgs-24_05 { inherit system; config.allowUnfree = true; };
     };
 
-    mkHost = hostname:
+    mkHost = hostname: let
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
+    in
       nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = {inherit hostname inputs;};
+        specialArgs = {
+          inherit hostname inputs;
+          custom_pkgs = import ./packages {inherit pkgs nixOld;};
+        };
 
         modules = [
           ./configuration.nix
           home-manager.nixosModules.home-manager
           nvf.nixosModules.default
 
-          ({pkgs, ...}: {
-            nixpkgs.config.allowUnfree = true;
+          ({custom_pkgs, ...}: {
             environment.systemPackages = [
-              (import ./packages {inherit pkgs nixOld;}).opera
+              custom_pkgs.opera
+              custom_pkgs.freecad-wrapped
             ];
           })
         ];

@@ -18,6 +18,11 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot.configurationLimit = 2;
+  boot.kernelParams = [
+    "amdgpu.gpu_recovery=1"
+    "amd_iommu=off"
+    "amdgpu.mcbp=0"
+  ];
 
   networking.networkmanager.enable = true;
   nix.settings.experimental-features = ["nix-command" "flakes"];
@@ -127,7 +132,10 @@
   programs.thunar.enable = true;
 
   xdg.portal.enable = true;
-  xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];
+  xdg.portal.extraPortals = [
+    pkgs.xdg-desktop-portal-hyprland
+    pkgs.xdg-desktop-portal-gtk
+  ];
 
   environment.systemPackages = with pkgs; [
     wget
@@ -156,6 +164,8 @@
     brightnessctl
     freecad-wayland
     libayatana-appindicator
+    reaper
+    reaper-reapack-extension
   ];
 
   systemd.tmpfiles.rules = [
@@ -177,6 +187,14 @@
       # "file_mode=0777"
       # "dir_mode=0777"
     ];
+  };
+
+  environment.sessionVariables = {
+    WLR_RENDERER = "vulkan"; # сначала Vulkan (на AMD обычно ок)
+    # Если вдруг будут глюки — поменять на:
+    # WLR_RENDERER = "gles2";
+    # На некоторых GPU помогает отключить liftoff:
+    # WLR_USE_LIBLIFTOFF = "0";
   };
 
   system.stateVersion = "24.11";
