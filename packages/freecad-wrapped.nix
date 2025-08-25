@@ -1,4 +1,3 @@
-# wrap-freecad.nix
 {pkgs}:
 pkgs.symlinkJoin {
   name = "freecad";

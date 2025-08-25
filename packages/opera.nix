@@ -18,6 +18,8 @@ oldPkgs.opera.overrideAttrs (old: rec {
     (old.postFixup or "")
     + ''
       RUNTIME_LIBS="${pkgs.lib.makeLibraryPath [
+        pkgs.ffmpeg-full
+        pkgs.vivaldi-ffmpeg-codecs
         pkgs.libglvnd
         pkgs.egl-wayland
         pkgs.libva
