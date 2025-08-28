@@ -151,6 +151,7 @@
     keepassxc
     ranger
     wl-clipboard
+    obs-studio
     lazygit
     unzip
     pavucontrol
