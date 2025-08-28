@@ -58,11 +58,8 @@
     enable = true;
     xkb.layout = "us,ru";
     xkb.options = "grp:alt_shift_toggle";
-
-    displayManager = {
-      gdm.enable = true;
-    };
   };
+  services.displayManager.gdm.enable = true;
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
