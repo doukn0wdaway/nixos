@@ -11,7 +11,6 @@ require("lazy").setup({
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
     { import = "lazyvim.plugins.extras.coding.yanky" },
     { import = "lazyvim.plugins.extras.dap.core" },
-    { import = "lazyvim.plugins.extras.lang.cmake" },
     { import = "lazyvim.plugins.extras.lang.markdown" },
     { import = "lazyvim.plugins.extras.lang.rust" },
     { import = "lazyvim.plugins.extras.lang.yaml" },
@@ -27,6 +26,7 @@ require("lazy").setup({
     { "jaybaby/mason-nvim-dap.nvim", enabled = false },
     -- uncomment to import/override with your plugins
     { import = "plugins" },
+    { import = "plugins.languages" },
     -- put this line at the end of spec to clear ensure_installed
     {
       "nvim-treesitter/nvim-treesitter",
