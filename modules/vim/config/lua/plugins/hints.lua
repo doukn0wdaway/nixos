@@ -36,9 +36,6 @@ return {
             },
           },
         },
-        clangd = {
-          inlay_hints = hints_enabled,
-        },
       },
     },
   },
