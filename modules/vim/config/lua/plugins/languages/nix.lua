@@ -1,4 +1,5 @@
 return {
+  ft = "nix",
   {
     "neovim/nvim-lspconfig",
     ---@class PluginLspOpts

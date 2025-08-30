@@ -3,8 +3,6 @@ let
   # Build plugins from github
   huez-nvim = pkgs.vimUtils.buildVimPlugin { name = "huez.nvim"; src = inputs.huez-nvim; };
   blame-me-nvim = pkgs.vimUtils.buildVimPlugin { name = "blame-me.nvim"; src = inputs.blame-me-nvim; };
-  cmake-tools-nvim = pkgs.vimUtils.buildVimPlugin { name = "cmake-tools.nvim"; src = inputs.cmake-tools-nvim; };
-  cmake-gtest-nvim = pkgs.vimUtils.buildVimPlugin { name = "cmake-gtest.nvim"; src = inputs.cmake-gtest-nvim; };
 
   mkEntryFromDrv = drv:
     if lib.isDerivation drv then
@@ -15,7 +13,6 @@ let
   plugins = with pkgs.vimPlugins; [
     LazyVim
     better-escape-nvim
-    clangd_extensions-nvim
     cmp-buffer
     cmp-nvim-lsp
     cmp-path
@@ -74,8 +71,6 @@ let
     { name = "LuaSnip"; path = luasnip; }
     { name = "blame-me.nvim"; path = blame-me-nvim; }
     { name = "catppuccin"; path = catppuccin-nvim; }
-    { name = "cmake-gtest.nvim"; path = cmake-gtest-nvim; }
-    { name = "cmake-tools.nvim"; path = cmake-tools-nvim; }
     { name = "huez.nvim"; path = huez-nvim; }
     { name = "mini.ai"; path = mini-nvim; }
     { name = "mini.bufremove"; path = mini-nvim; }
