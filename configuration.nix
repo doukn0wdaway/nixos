@@ -1,9 +1,10 @@
-{ config
-, lib
-, hostname
-, pkgs
-, inputs
-, ...
+{
+  config,
+  lib,
+  hostname,
+  pkgs,
+  inputs,
+  ...
 }: {
   imports =
     [
@@ -23,7 +24,7 @@
   ];
 
   networking.networkmanager.enable = true;
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
   nix.gc = {
     automatic = true;
     dates = "daily";
@@ -41,7 +42,7 @@
   };
   # Set your time zone.
   time.timeZone = "Europe/Kyiv";
-  nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+  nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -56,8 +57,8 @@
     enable = true;
     xkb.layout = "us,ru";
     xkb.options = "grp:alt_shift_toggle";
+    displayManager.gdm.enable = true;
   };
-  services.displayManager.gdm.enable = true;
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
@@ -101,13 +102,13 @@
   users.defaultUserShell = pkgs.zsh;
   users.users.etraxis = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = ["wheel" "networkmanager"];
     shell = pkgs.zsh;
-    openssh.authorizedKeys.keyFiles = [ "/home/etraxis/.ssh/id_ed25519.pub" ];
+    openssh.authorizedKeys.keyFiles = ["/home/etraxis/.ssh/id_ed25519.pub"];
   };
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs hostname; };
+    extraSpecialArgs = {inherit inputs hostname;};
     backupFileExtension = "backup";
     users = {
       etraxis = import ./home.nix;
