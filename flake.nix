@@ -9,23 +9,18 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nvf = {
-      url = "github:notashelf/nvf";
-    };
-
     nixpkgs-23_11.url = "github:NixOS/nixpkgs/nixos-23.11";
 
-    # vim = {
-    #   url = "github:doukn0wdaway/vim";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    vim = {
+      url = "./modules/vim";
+    };
   };
   outputs = {
     self,
     nixpkgs,
     nixpkgs-23_11,
     home-manager,
-    # vim,
+    vim,
     ...
   } @ inputs: let
     system = "x86_64-linux";
@@ -59,7 +54,7 @@
             environment.systemPackages = [
               custom_pkgs.opera
               custom_pkgs.freecad-wrapped
-              # vim.packages.${system}.default
+              vim.packages.${system}.default
             ];
           })
         ];

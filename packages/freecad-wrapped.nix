@@ -1,8 +1,8 @@
-{pkgs}:
+{ pkgs }:
 pkgs.symlinkJoin {
   name = "freecad";
-  paths = [pkgs.freecad];
-  buildInputs = [pkgs.makeWrapper];
+  paths = [ pkgs.freecad ];
+  buildInputs = [ pkgs.makeWrapper ];
   postBuild = ''
     RUNTIME_LIBS="${pkgs.lib.makeLibraryPath [
       pkgs.libglvnd

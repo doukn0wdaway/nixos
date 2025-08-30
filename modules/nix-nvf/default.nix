@@ -1,4 +1,4 @@
-{programs, ...}: {
+{ programs, ... }: {
   programs.nvf = {
     enable = true;
     settings = {

@@ -1,10 +1,9 @@
-{
-  config,
-  lib,
-  pkgs,
-  hostname,
-  inputs,
-  ...
+{ config
+, lib
+, pkgs
+, hostname
+, inputs
+, ...
 }: {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -95,8 +94,7 @@
   # or
   #
   #
-  home.sessionVariables = {
-  };
+  home.sessionVariables = { };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

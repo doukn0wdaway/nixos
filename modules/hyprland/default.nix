@@ -1,11 +1,10 @@
-{
-  config,
-  hostname,
-  lib,
-  pkgs,
-  ...
+{ config
+, hostname
+, lib
+, pkgs
+, ...
 }: {
-  home.packages = with pkgs; [hyprland hyprshot];
+  home.packages = with pkgs; [ hyprland hyprshot ];
   home.file = {
     ".config/hypr/hyprland.conf" = {
       source =

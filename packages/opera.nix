@@ -1,6 +1,6 @@
-{
-  pkgs,
-  oldPkgs,
+{ pkgs
+, oldPkgs
+,
 }:
 oldPkgs.opera.overrideAttrs (old: rec {
   pname = "opera";
@@ -12,7 +12,7 @@ oldPkgs.opera.overrideAttrs (old: rec {
     hash = "sha256-BGY/iDJrzZgf0i/tbWeSe7d9ebepHBARi5qTXG1f9rg=";
   };
 
-  nativeBuildInputs = (old.nativeBuildInputs or []) ++ [pkgs.makeWrapper];
+  nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkgs.makeWrapper ];
 
   postFixup =
     (old.postFixup or "")
