@@ -9,7 +9,6 @@
   imports =
     [
       ./modules/bspwm
-      ./modules/nix-nvf
     ]
     ++ lib.optional (hostname == "pc") ./pc-hardware-configuration.nix
     ++ lib.optional (hostname == "laptop") ./laptop-hardware-configuration.nix;
@@ -135,6 +134,8 @@
   ];
 
   environment.systemPackages = with pkgs; [
+    hoppscotch
+    bruno
     wget
     btop
     networkmanager
