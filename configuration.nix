@@ -132,8 +132,18 @@
     pkgs.xdg-desktop-portal-gtk
   ];
 
+
+  #for minecraft
+  networking.firewall = lib.mkIf (config.networking.hostName == "laptop") {
+    allowedTCPPorts = [ 25565 ];
+    allowedUDPPorts = [ 25565 ];
+  };
+
+
+
   environment.systemPackages = with pkgs; [
     hoppscotch
+    prismlauncher
     bruno
     wget
     btop
